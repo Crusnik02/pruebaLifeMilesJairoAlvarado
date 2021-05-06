@@ -42,6 +42,12 @@ public class PruebaMensaje {
                     String codigo = codificarOctal(mensaje);
                     System.out.println("mensaje codificado exitosamente");
                     System.out.println(codigo);
+                } else if(unidad == 3) {
+                    System.out.println("Digite el mensaje");
+                    mensaje = scann.nextLine();
+                    String codigo = codificarBACEDIFOGU(mensaje);
+                    System.out.println("mensaje codificado exitosamente");
+                    System.out.println(codigo);
                 }
             } else if (opcion ==2) {
                 System.out.println("Programa terminado");
@@ -134,6 +140,31 @@ public class PruebaMensaje {
     public static String codificarOctal(String mensaje) {
         String mensajeCodificado= "";
         mensajeCodificado= mensaje.chars().boxed().map(Integer::toOctalString).collect(Collectors.joining(" "));
+        return mensajeCodificado;
+    }
+    
+    public static String codificarBACEDIFOGU(String mensaje) {
+        Hashtable<String, String> equivalencias = new Hashtable<>();
+        String mensajeCodificado = "";
+        equivalencias.put("B", "0");
+        equivalencias.put("A", "1");
+        equivalencias.put("C", "2");
+        equivalencias.put("E", "3");
+        equivalencias.put("D", "4");
+        equivalencias.put("I", "5");
+        equivalencias.put("F", "6");
+        equivalencias.put("O", "7");
+        equivalencias.put("G", "8");
+        equivalencias.put("U" ,"9");
+        for (int i = 0; i < mensaje.length(); i++) {
+            char letra = mensaje.toUpperCase().charAt(i);
+            System.out.println(equivalencias.get(String.valueOf(letra)));
+            if (equivalencias.get(String.valueOf(letra)) == null) {
+                mensajeCodificado += mensaje.charAt(i);
+            } else {                
+                mensajeCodificado += equivalencias.get(String.valueOf(letra));
+            }
+        }
         return mensajeCodificado;
     }
     
